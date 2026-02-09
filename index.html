@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For You ❤️</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #ffe6f0;
+      padding: 30px;
+    }
+    h1, h2 {
+      color: #e60073;
+    }
+    button {
+      font-size: 18px;
+      padding: 12px 30px;
+      margin: 15px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+    }
+    .next {
+      background: #ff66a3;
+      color: white;
+    }
+    .yes {
+      background: #ff4d88;
+      color: white;
+    }
+    .no {
+      background: #999;
+      color: white;
+    }
+    img {
+      width: 200px;
+      border-radius: 15px;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1">
+  <h1>Hello Husband 💖</h1>
+  <p>I have something special for you 😘</p>
+  <button class="next" onclick="goNext()">Next ➡️</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" style="display:none;">
+  <h2>Will you be my Valentine, sweetheart? 💘</h2>
+
+  <button class="yes" onclick="yesClick()">YES 😍</button>
+  <button class="no" onclick="noClick()">NO 🙈</button>
+
+  <div id="content"></div>
+</div>
+
+<script>
+function goNext() {
+  document.getElementById("page1").style.display = "none";
+  document.getElementById("page2").style.display = "block";
+}
+
+function yesClick() {
+  document.getElementById("content").innerHTML = `
+    <h3>Yayyy ❤️</h3>
+    <p>You just made me the happiest 🥹💖</p>
+
+    <p>💌 When did we first meet?</p>
+    <p>💌 What do you love most about us?</p>
+    <p>💌 Forever with me?</p>
+
+    <h3>Us 🥰</h3>
+    <img src="pic1.jpg">
+    <img src="pic2.jpg">
+
+    <p>— Yours forever 💕</p>
+  `;
+}
+
+function noClick() {
+  alert("No is not allowed 😌 Try again!");
+}
+</script>
+
+</body>
+</html>
