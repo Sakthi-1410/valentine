@@ -4,87 +4,166 @@
   <title>For You ❤️</title>
   <style>
     body {
-      text-align: center;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background: #ffe6f0;
-      padding: 30px;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
     }
-    h1, h2 {
-      color: #e60073;
+
+    h1, h2, h3 { color: #e60073; }
+
+    .slide { display: none; }
+    .active { display: block; }
+
+    textarea {
+      width: 90%;
+      height: 50px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      margin-bottom: 15px;
     }
+
     button {
-      font-size: 18px;
-      padding: 12px 30px;
-      margin: 15px;
-      border-radius: 12px;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 10px;
       border: none;
-      cursor: pointer;
-    }
-    .next {
-      background: #ff66a3;
-      color: white;
-    }
-    .yes {
       background: #ff4d88;
       color: white;
-    }
-    .no {
-      background: #999;
-      color: white;
-    }
-    img {
-      width: 200px;
-      border-radius: 15px;
+      cursor: pointer;
       margin: 10px;
+    }
+
+    .noBtn {
+      background: #999;
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      color: #ff4d88;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-100vh); opacity: 0; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
-<div id="page1">
-  <h1>Hello Husband 💖</h1>
-  <p>I have something special for you 😘</p>
-  <button class="next" onclick="goNext()">Next ➡️</button>
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide1">
+  <h1>Hello Husband ❤️</h1>
+  <p>I have something special for you 🥰</p>
+  <button onclick="nextSlide(2)">Next ➡️</button>
 </div>
 
-<!-- PAGE 2 -->
-<div id="page2" style="display:none;">
+<!-- SLIDE 2 -->
+<div class="slide" id="slide2">
   <h2>Will you be my Valentine, sweetheart? 💘</h2>
+  <button onclick="nextSlide(3)">YES 😍</button>
+  <button class="noBtn" onclick="noClick()">NO 🙈</button>
+</div>
 
-  <button class="yes" onclick="yesClick()">YES 😍</button>
-  <button class="no" onclick="noClick()">NO 🙈</button>
+<!-- SLIDE 3 -->
+<div class="slide" id="slide3">
+  <h2>Here are 10 cute questions about us 💌</h2>
 
-  <div id="content"></div>
+  <p>1. What was the first thing you noticed about me? 🥺</p>
+  <textarea id="q1"></textarea>
+
+  <p>2. When did you realize I was special to you? 💭</p>
+  <textarea id="q2"></textarea>
+
+  <p>3. What’s your favorite memory of us so far? 📸</p>
+  <textarea id="q3"></textarea>
+
+  <p>4. What do I do that makes you feel calm or happy? 🌸</p>
+  <textarea id="q4"></textarea>
+
+  <p>5. What nickname do you secretly love when I call you? 😌</p>
+  <textarea id="q5"></textarea>
+
+  <button onclick="saveAnswers()">💾 Save</button>
+  <button onclick="nextSlide(4)">Next ➡️</button>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide4">
+  <p>6. What song reminds you of me? 🎶</p>
+  <textarea id="q6"></textarea>
+
+  <p>7. What’s one small thing about me you never want to lose? 💞</p>
+  <textarea id="q7"></textarea>
+
+  <p>8. What’s something about us that makes you feel proud? ✨</p>
+  <textarea id="q8"></textarea>
+
+  <p>9. When you think about the future, do you see me there? 🌙</p>
+  <textarea id="q9"></textarea>
+
+  <p>10. What moment with me made you feel “this is home”? 🏡</p>
+  <textarea id="q10"></textarea>
+
+  <button onclick="saveAnswers()">💾 Save</button>
+  <button onclick="nextSlide(5)">Next ➡️</button>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide5">
+  <h2>I LOVE U MORE THANGAMEYY ❤️</h2>
+  <p>
+    Thanking you for choosing me and being the bestest.<br>
+    You are definitely a limelight in my hard days…..<br>
+    And always my strength 🤍
+  </p>
+
+  <h3>Will u marry ma? 💍🥺</h3>
+  <button>YES 💖</button>
 </div>
 
 <script>
-function goNext() {
-  document.getElementById("page1").style.display = "none";
-  document.getElementById("page2").style.display = "block";
-}
-
-function yesClick() {
-  document.getElementById("content").innerHTML = `
-    <h3>Yayyy ❤️</h3>
-    <p>You just made me the happiest 🥹💖</p>
-
-    <p>💌 When did we first meet?</p>
-    <p>💌 What do you love most about us?</p>
-    <p>💌 Forever with me?</p>
-
-    <h3>Us 🥰</h3>
-    <img src="pic1.jpg">
-    <img src="pic2.jpg">
-
-    <p>— Yours forever 💕</p>
-  `;
+function nextSlide(num) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.getElementById('slide' + num).classList.add('active');
 }
 
 function noClick() {
-  alert("No is not allowed 😌 Try again!");
+  alert("No is not an option 😌 Try again!");
 }
+
+function saveAnswers() {
+  for (let i = 1; i <= 10; i++) {
+    localStorage.setItem("q" + i, document.getElementById("q" + i).value);
+  }
+  alert("Answers saved 💖");
+}
+
+window.onload = () => {
+  for (let i = 1; i <= 10; i++) {
+    if (localStorage.getItem("q" + i)) {
+      document.getElementById("q" + i).value = localStorage.getItem("q" + i);
+    }
+  }
+};
+
+// Hearts
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 500);
 </script>
 
 </body>
